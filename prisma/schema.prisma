@@ -12,30 +12,25 @@ datasource db {
 
 // Ogcisum
 model Sample {
-  id                 Int                  @id @default(autoincrement())
-  name               String
-  datetime           DateTime             @default(now())
-  type               String
-  recording_data     String
-  SamplesToLocations SamplesToLocations[]
+  id             Int      @id @default(autoincrement())
+  name           String
+  datetime       DateTime @default(now())
+  type           String
+  recording_data String
 }
 
 model SamplesToLocations {
-  sample      Sample   @relation(fields: [sample_id], references: [id])
-  location    Location @relation(fields: [location_id], references: [id])
+  id          Int      @id @default(autoincrement())
   datetime    DateTime @default(now())
   sample_id   Int      @unique
   location_id Int      @unique
-
-  @@id([sample_id, location_id])
 }
 
 model Location {
-  id                 Int                  @id @default(autoincrement())
-  location           String
-  suburb             String
-  state              String
-  country            String
-  latlong            String
-  SamplesToLocations SamplesToLocations[]
+  id       Int    @id @default(autoincrement())
+  location String
+  suburb   String
+  state    String
+  country  String
+  latlong  String
 }
