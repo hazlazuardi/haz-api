@@ -10,7 +10,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     await cors(req, res)
     const sample = await prisma.sample.findMany()
 
-    const { sampleName, sampleType, mode } = req.query
+    const { id, sampleName, sampleType, mode } = req.query
 
     if (mode === 'create') {
         const createdSample = await prisma.sample.create({
@@ -22,6 +22,18 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             }
         })
         res.json({ sample: { ...createdSample } })
+    } else if (mode === 'update') {
+        const updatedSample = await prisma.sample.update({
+            where: {
+                id: parseInt(id)
+            },
+            data: {
+                name: sampleName,
+                type: sampleType,
+                recording_data: req.body
+            }
+        })
+        res.json({ sample: { ...updatedSample } })
     } else {
         res.json({ samples: [...sample] })
     }
