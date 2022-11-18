@@ -1,0 +1,41 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Ogcisum
+model Sample {
+  id                 Int                  @id @default(autoincrement())
+  name               String
+  datetime           DateTime             @default(now())
+  type               String
+  recording_data     String
+  SamplesToLocations SamplesToLocations[]
+}
+
+model SamplesToLocations {
+  sample      Sample   @relation(fields: [sample_id], references: [id])
+  location    Location @relation(fields: [location_id], references: [id])
+  datetime    DateTime @default(now())
+  sample_id   Int      @unique
+  location_id Int      @unique
+
+  @@id([sample_id, location_id])
+}
+
+model Location {
+  id                 Int                  @id @default(autoincrement())
+  location           String
+  suburb             String
+  state              String
+  country            String
+  latlong            String
+  SamplesToLocations SamplesToLocations[]
+}
