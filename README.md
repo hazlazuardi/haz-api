@@ -1,14 +1,18 @@
-This project is the back-end for all Hazlazuardi's front-end projects. The stack used in this project includes [NextJs](https://nextjs.org/), [Prisma](https://prisma.io), and [PostgreSQL](https://postgresql.org).
+This project is the back-end for all Hazlazuardi's front-end projects. The stack used in this project includes [NextJs](https://nextjs.org/), [Prisma](https://prisma.io/), and [PostgreSQL](https://postgresql.org/).
 
 NextJs is the back end of the project. Prisma is responsible as an ORM. Lastly, this project uses PostgreSQL as the database.
 
+
 # Getting Started
+
 ## Prerequisites
-Make sure your machine has Docker installed and ready to use. Follow the documentation here to get started with Docker.
-Also, make sure to clone this repository into your local machine.
+Make sure your machine has [Docker](https://docker.com/) installed and ready to use. Follow the documentation [here](https://docker.com/get-started/) to get started with Docker.
+Also, make sure to clone [this repository](https://github.com/hazlazuardi/haz-api) into your local machine.
+
 
 # Running the App
-## NextJS app
+
+## [NextJs app](https://nextjs.org/)
 To run the development server: 
 ```bash
 docker compose up -d
@@ -16,7 +20,7 @@ docker compose up -d
 
 After the docker container status becomes running, you can access the app on `http://localhost:8080`.
 
-## Prisma Studio
+## [Prisma Studio](https://www.prisma.io/studio)
 Prisma Studio is a modern GUI to access and manage data inside the database that connects with a Prisma project. 
 
 Since this project uses Prisma as the ORM, you can utilize Prisma Studio.
@@ -31,6 +35,7 @@ npx prisma studio
 ```
 
 After Prisma Studio status becomes running, you can access it on `http://localhost:5555`.
+
 
 # Featured Project
 
@@ -80,7 +85,6 @@ api/ogcisum/samplesToLocations?mode=create&sampleID=${sampleID}&locationID=${loc
 api/ogcisum/samplesToLocations?mode=delete&id=${relID}
 ```
 - `${relID}` — the id of the `samplesToLocations` object.
-
 
 
 # Upcoming projects
