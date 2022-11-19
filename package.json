@@ -6,7 +6,12 @@
     "dev": "next dev -p 8080",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prisma:migrate:dev": "npx prisma migrate dev && npx prisma db seed",
+    "cmd:start:dev": "npm run prisma:migrate:dev && npm run dev"
+  },
+  "prisma": {
+    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
   },
   "dependencies": {
     "@prisma/client": "^4.6.1",
@@ -21,6 +26,8 @@
     "@types/react": "18.0.25",
     "eslint": "8.27.0",
     "eslint-config-next": "13.0.3",
-    "prisma": "^4.6.1"
+    "prisma": "^4.6.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.3"
   }
 }

@@ -1,0 +1,39 @@
+name: haz-api
+services:
+  backend:
+    container_name: haz-api-backend
+    build: .
+    env_file:
+      - .env
+    networks:
+      - client-side
+      - server-side
+    ports:
+      - 8080:8080
+      - 5555:5555
+    volumes:
+      - ./:/app
+      - ./node_modules:/app/node_modules
+      - ./.next:/app/.next
+    depends_on:
+      - db
+
+  db:
+    image: postgres:12-alpine
+    container_name: haz-api-db
+    restart: always
+    env_file:
+      - .env
+    networks:
+      - server-side
+    ports:
+      - 5432:5432
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+networks:
+  client-side: {}
+  server-side: {}
+
+volumes:
+  db-data: {}
