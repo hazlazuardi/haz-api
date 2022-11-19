@@ -1,34 +1,87 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This project is the back-end for all Hazlazuardi's front-end projects. The stack used in this project includes [NextJs](https://nextjs.org/), [Prisma](https://prisma.io), and [PostgreSQL](https://postgresql.org).
 
-## Getting Started
+NextJs is the back end of the project. Prisma is responsible as an ORM. Lastly, this project uses PostgreSQL as the database.
 
-First, run the development server:
+# Getting Started
+## Prerequisites
+Make sure your machine has Docker installed and ready to use. Follow the documentation here to get started with Docker.
+Also, make sure to clone this repository into your local machine.
 
+# Running the App
+## NextJS app
+To run the development server: 
 ```bash
-npm run dev
-# or
-yarn dev
+docker compose up -d
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+After the docker container status becomes running, you can access the app on `http://localhost:8080`.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## Prisma Studio
+Prisma Studio is a modern GUI to access and manage data inside the database that connects with a Prisma project. 
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+Since this project uses Prisma as the ORM, you can utilize Prisma Studio.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+To open Prisma Studio:
+1. Open Docker Desktop.
+2. Open the project container's CLI.
 
-## Learn More
+In the project container's CLI, run:
+```bash
+npx prisma studio
+```
 
-To learn more about Next.js, take a look at the following resources:
+After Prisma Studio status becomes running, you can access it on `http://localhost:5555`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# Featured Project
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## [Ogcisum](https://github.com/hazlazuardi/ogcisum_web)
+There are three main objects in this project. Below are the endpoints to do the CRUD operations.
 
-## Deploy on Vercel
+### Get all samples
+```bash
+api/ogcisum/samples?mode=read
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Create a sample
+```bash
+api/ogcisum/samples?mode=create&sampleType=${sampleType}&sampleName=${sampleName}
+```
+- `${sampleType}` — the instrument of the sample.
+- `${sampleName}` — the name of the sample.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### Edit a sample
+```bash
+api/ogcisum/samples?mode=update&sampleType=${sampleType}&sampleName=${sampleName}&id=${id}`
+```
+- `${sampleType}` — the instrument of the sample.
+- `${sampleName}` — the name of the sample.
+- `${id}` — the id of the sample.
+
+
+### Get all locations
+```bash
+api/ogcisum/locations?mode=read
+```
+
+### Get all samples to locations pivot table
+```bash
+api/ogcisum/samplesToLocations?mode=read
+```
+
+### Share a sample to a location
+```bash
+api/ogcisum/samplesToLocations?mode=create&sampleID=${sampleID}&locationID=${locationID}
+``` 
+- `${sampleID}` — the id of the sample.
+- `${locationID}` — the id of the location.
+
+### Unshare a sample with a location
+```bash
+api/ogcisum/samplesToLocations?mode=delete&id=${relID}
+```
+- `${relID}` — the id of the `samplesToLocations` object.
+
+
+
+# Upcoming projects
+1. [Markaz Pilar](https://github.com/hazlazuardi/markaz-pillar-fe)
