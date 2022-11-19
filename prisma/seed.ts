@@ -1,22 +1,6 @@
 import { PrismaClient } from '@prisma/client'
 import { locations } from './seedData'
-
-const prisma = new PrismaClient()
-// async function main() {
-//     const alice = await prisma.location.upsert({
-//     })
-
-//     console.log({})
-// }
-// main()
-//     .then(async () => {
-//         await prisma.$disconnect()
-//     })
-//     .catch(async (e) => {
-//         console.error(e)
-//         await prisma.$disconnect()
-//         process.exit(1)
-//     })
+import prisma from '../lib/prisma';
 
 function seedLocations() {
     Promise.all(locations.map(location => prisma.location.create({
